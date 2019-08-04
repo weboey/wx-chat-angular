@@ -1,0 +1,16 @@
+<div>
+  <div style="background-color: aqua; text-align: center; height: 42px;line-height: 42px">
+    <span (click)="start()">Angular 微信聊天室</span> <span style="margin-left: 6px">{{totalUnRead}} <span style="margin-left: 6px" (click)="stop()">stop</span></span>
+  </div>
+
+  <ul>
+    <li *ngFor="let item of dataList" class="message" (click)="goChat(item.type, item.id)">
+      <img src="https://img.mukewang.com/583b97d80001280f08500448.png" alt="">
+      <div class="info">
+        <p class="from">{{item.from_user}}<span>{{item.time}}</span></p>
+        <p>{{item.message}}</p>
+        <span class="read">{{item.unread}}</span>
+      </div>
+    </li>
+  </ul>
+</div>

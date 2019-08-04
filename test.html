@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <style>
+    p{
+      display: inline-block;
+      width: 60px;
+      height: 60px;
+      text-align: center;
+      line-height: 60px;
+      margin: 10px;
+      background-color: #7e57ff;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+</body>
+<script>
+  function timeChunk(arr, fn, count, fn2) {
+    var obj, t;
+    var len = arr.length;
+    var start = function() {
+      for (var i = 0; i < Math.min(count || 1, arr.length); i++) {
+        var obj = arr.shift();
+        fn(obj)
+      }
+      if (arr.length === 0) {
+
+      }
+    };
+    return function() {
+      t = setInterval(function() {
+        if (arr.length === 0) {
+          fn2(arr.length);
+          return clearInterval(t);
+        }
+        start()
+      }, 500)
+    }
+  }
+
+  (function () {
+    var arr = [];
+    for (var i = 1; i <= 100; i++) {
+      arr.push(i) //假设arr装载了100个好友数据
+    }
+    var renderFriendList = timeChunk(arr, function(n) {
+      var div = document.createElement('p');
+      div.innerHTML = n;
+      document.body.appendChild(div)
+    }, 10, function (count) {
+      console.log(count)
+    });
+    renderFriendList();
+  })()
+</script>
+</html>
